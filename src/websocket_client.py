@@ -1,22 +1,8 @@
 import socketio
 import os
-from chrome_manager import abrir_chromes_com_perfis, listar_grupos
-
-# Caminho fixo para a pasta de perfis
-PASTA_PERFIS = "C:\\WSACTION\\PERFIS"
-
-# Verificar e criar a pasta principal se ela não existir
-def verificar_ou_criar_pasta_principal():
-    if not os.path.exists(PASTA_PERFIS):
-        try:
-            os.makedirs(PASTA_PERFIS)
-            print(f"Pasta principal de perfis '{PASTA_PERFIS}' criada com sucesso.")
-        except Exception as e:
-            print(f"Erro ao criar a pasta principal '{PASTA_PERFIS}': {e}")
-
-# Chamar a função para garantir que a pasta principal existe
-verificar_ou_criar_pasta_principal()
-
+from chrome_manager import abrir_chromes_com_perfis, listar_grupos, PASTA_PERFIS, abrir_chromes_de_grupo
+from config import carregar_configuracao
+config = carregar_configuracao()
 # Criação do cliente Socket.IO
 sio = socketio.Client()
 
@@ -56,12 +42,12 @@ def handle_command(data):
         group = data.get('value')
         if group:
             print(f"Abrindo o grupo: {group}")
-            # Aqui você pode adicionar a lógica para abrir o grupo real no sistema
             sio.emit('TESTE.TESTE:command', {
                 'event': 'openGroup',
                 'type': 'response',
                 'success': True
             })
+            abrir_chromes_de_grupo(group, config)
         else:
             sio.emit('TESTE.TESTE:command', {
                 'event': 'openGroup',
