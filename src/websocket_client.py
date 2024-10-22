@@ -23,7 +23,7 @@ def receber_configuracao(data):
     abrir_chromes_com_perfis(data)
 
 # Evento para responder a solicitação de listar grupos e abrir perfil
-@sio.on('TESTE:command')
+@sio.on('CHROME-PROFILE:command')
 def handle_command(data):
     event_type = data.get('event')
 
@@ -101,6 +101,9 @@ def handle_command(data):
                 'error': 'Nenhum nome de grupo foi informado.'
             })
             print("Nenhum nome de grupo foi informado.")
+@sio.on('*')
+def handle1_command(evenv,data):
+    print([evenv,data])
 
 # Função para conectar ao servidor WebSocket
 def conectar_servidor_websocket(url):
