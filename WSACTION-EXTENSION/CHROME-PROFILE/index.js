@@ -1,3 +1,4 @@
+const { spawn } = require('child_process');
 /**
  * Módulo da extensão.
  * 
