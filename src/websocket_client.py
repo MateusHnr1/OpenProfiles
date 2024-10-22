@@ -31,7 +31,7 @@ def handle_command(data):
     if event_type == "getGroups" and data.get('type') == "request":
         print("Solicitação para listar grupos recebida.")
         # Emitir a resposta com os grupos
-        sio.emit('TESTE.TESTE:command', {
+        sio.emit('CHROME-PROFILE.CHROME-PROFILE:command', {
             'event': 'getGroups',
             'type': 'response',
             'value': listar_grupos()
@@ -42,14 +42,14 @@ def handle_command(data):
         group = data.get('value')
         if group:
             print(f"Abrindo o grupo: {group}")
-            sio.emit('TESTE.TESTE:command', {
+            sio.emit('CHROME-PROFILE.CHROME-PROFILE:command', {
                 'event': 'openGroup',
                 'type': 'response',
                 'success': True
             })
             abrir_chromes_de_grupo(group, config)
         else:
-            sio.emit('TESTE.TESTE:command', {
+            sio.emit('CHROME-PROFILE.CHROME-PROFILE:command', {
                 'event': 'openGroup',
                 'type': 'response',
                 'success': False,
@@ -72,14 +72,14 @@ def handle_command(data):
                     # Abrir a pasta do novo grupo
                     os.startfile(group_path)
                     
-                    sio.emit('TESTE.TESTE:command', {
+                    sio.emit('CHROME-PROFILE.CHROME-PROFILE:command', {
                         'event': 'createGroup',
                         'type': 'response',
                         'success': True
                     })
                 except Exception as e:
                     print(f"Erro ao criar o grupo '{group_name}': {e}")
-                    sio.emit('TESTE.TESTE:command', {
+                    sio.emit('CHROME-PROFILE.CHROME-PROFILE:command', {
                         'event': 'createGroup',
                         'type': 'response',
                         'success': False,
@@ -87,14 +87,14 @@ def handle_command(data):
                     })
             else:
                 print(f"O grupo '{group_name}' já existe.")
-                sio.emit('TESTE.TESTE:command', {
+                sio.emit('CHROME-PROFILE.CHROME-PROFILE:command', {
                     'event': 'createGroup',
                     'type': 'response',
                     'success': False,
                     'error': 'O grupo já existe.'
                 })
         else:
-            sio.emit('TESTE.TESTE:command', {
+            sio.emit('CHROME-PROFILE.CHROME-PROFILE:command', {
                 'event': 'createGroup',
                 'type': 'response',
                 'success': False,

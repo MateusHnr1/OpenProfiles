@@ -1,0 +1,13 @@
+{
+    "name": "CHROME-PROFILE",
+    "version": "1.0.0",
+    "github": "https://github.com/myextension",
+    "minVersion": "2.10.0-BETA-1",
+    "compatibility": [
+        "2.10.0-BETA-1"
+    ],
+    "id": "17296122920941fe29cwla-TEMP",
+    "WEB_SCRIPTS": [
+        "client.js"
+    ]
+}
